@@ -2,42 +2,10 @@
 import discord
 import asyncio
 import random
-
-
-LOW_NUMBER_INSULTS = [
-  "Your IQ",
-  "Your swag level",
-  "Your Facebook friend count",
-  "Your bank account balance",
-  "Your life expectancy",
-  "Your salaries",
-  "Your Twitter follower count",
-  "Your maximum bench press weight"
-]
-
-HIGH_NUMBER_INSULTS = [
-  "Yo' mama's weight",
-  "Your BMI",
-  "Your ego level",
-  "Your weight",
-  "Your golf handicap",
-  "The age of your virginity loss"
-]
-
-
-def is_prime(number):
-  if number <= 1 or number % 2 == 0:
-    return False
-
-  i = 3
-  while i*i <= number:
-    if number % i == 0:
-      return False
-
-    i += 2
-
-  return True
-
+from prime import checkForPrime
+from eightball import ask8ball
+from spoilme import spoilme
+from wisecracker import crack_a_joke
 
 client = discord.Client()
 
@@ -51,31 +19,15 @@ async def on_ready():
 @client.event
 async def on_message(message):
   if message.content.startswith('!prime'):
-    try:
-      number = int(message.content[6:].strip())
+    await checkForPrime(client, message)
+  elif message.content.startswith('!8ball'):
+    await ask8ball(client, message)
+  elif message.content.startswith('!spoilme'):
+    await spoilme(client, message)
 
-      if number == 42:
-        await client.send_message(message.channel, "This is the answer to life, the universe, and everything.")
-        
-      elif is_prime(number):
-        if number <= 40:
-          await client.send_message(message.channel, "Yes. {} is a prime number.".format(random.choice(LOW_NUMBER_INSULTS)))
-        elif number > 150:
-          await client.send_message(message.channel, "Yes. {} is a prime number.".format(random.choice(HIGH_NUMBER_INSULTS)))
-        else:
-          await client.send_message(message.channel, "Yes. {} is a prime number.".format(number))
-      else:
-        if number <= 40:
-          await client.send_message(message.channel, "No. {} is not a prime number.".format(random.choice(LOW_NUMBER_INSULTS)))
-        elif number > 150:
-          await client.send_message(message.channel, "No. {} is not a prime number.".format(random.choice(HIGH_NUMBER_INSULTS)))
-        else:
-          await client.send_message(message.channel, "No. {} is not a prime number.".format(number))
-    except:
-      await client.send_message(message.channel, "Who taught you to type?")
+  await crack_a_joke(client, message)
 
-
-with open(".discord_login") as f:
+with open("discord.login") as f:
   email = f.readline().rstrip()
   password = f.readline().rstrip()
   client.run(email, password)
