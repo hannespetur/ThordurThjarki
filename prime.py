@@ -24,6 +24,9 @@ HIGH_NUMBER_INSULTS = [
 ]
 
 def is_prime(number):
+  if number == 2:
+    return True
+
   if number <= 1 or number % 2 == 0:
     return False
 
