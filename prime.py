@@ -21,6 +21,7 @@ HIGH_NUMBER_INSULTS = [
   "The age of your virginity loss"
 ]
 
+
 def is_prime(number):
   if number == 2:
     return True
@@ -36,6 +37,7 @@ def is_prime(number):
     i += 2
 
   return True
+
 
 async def check_for_prime(client, message):
   try:
