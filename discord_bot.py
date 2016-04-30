@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import discord
+import sys
 from usage import print_usage
 from prime import check_for_prime
 from eightball import ask8ball
@@ -30,14 +31,19 @@ async def on_message(message):
   elif message.content.startswith('!kill'):
     await kill_bot(client, message, client.user.name)
   elif message.content.startswith('!prime'):
-    await checkForPrime(client, message)
+    await check_for_prime(client, message)
   elif message.content.startswith('!spoilme'):
     await spoilme(client, message)
 
   await crack_a_joke(client, message)
 
 
-with open("discord.login") as f:
+login_file = "discord.login"
+
+if len(sys.argv) == 2:
+  login_file = str(sys.argv[1])
+
+with open(login_file) as f:
   email = f.readline().rstrip()
   password = f.readline().rstrip()
   client.run(email, password)

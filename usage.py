@@ -18,7 +18,7 @@ LIST_OF_USAGES = [
 ]
 
 async def print_usage(client, message):
-  split_msg = message.lower().rstrip().split(" ")
+  split_msg = message.content.lower().rstrip().split(" ")
 
   if len(split_msg) == 2:
     if split_msg[1] == "8ball":
