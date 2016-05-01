@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import discord
-import asyncio
 import random
 
 LOW_NUMBER_INSULTS = [
@@ -23,7 +21,11 @@ HIGH_NUMBER_INSULTS = [
   "The age of your virginity loss"
 ]
 
+
 def is_prime(number):
+  if number == 2:
+    return True
+
   if number <= 1 or number % 2 == 0:
     return False
 
@@ -36,7 +38,8 @@ def is_prime(number):
 
   return True
 
-async def checkForPrime(client, message):
+
+async def check_for_prime(client, message):
   try:
     number = int(message.content[6:].strip())
 
