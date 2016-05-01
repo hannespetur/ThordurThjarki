@@ -6,8 +6,10 @@ from prime import checkForPrime
 from eightball import ask8ball
 from spoilme import spoilme
 from wisecracker import crack_a_joke
+from trivia import Trivia
 
 client = discord.Client()
+trivia = Trivia()
 
 @client.event
 async def on_ready():
@@ -24,7 +26,8 @@ async def on_message(message):
     await ask8ball(client, message)
   elif message.content.startswith('!spoilme'):
     await spoilme(client, message)
-
+  elif message.content.startswith('!trivia') or message.content.startswith('!t'):
+    await trivia.do_some_trivia(client, message)
   await crack_a_joke(client, message)
 
 with open("discord.login") as f:
