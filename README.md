@@ -16,4 +16,3 @@ Requirements
 ------------
 * Python 3.5+
 * [Discord.py](https://github.com/Rapptz/discord.py) (run python setup.py install on the async branch)
-* GitPython (run pip install gitpython)
