@@ -7,6 +7,7 @@ HELP_USAGE = " !help [cmd] or !usage [cmd] outputs help for command or all comma
 KILL_USAGE = " !kill <bot1> [bot2]... kills a list of bots (or restarts them if they are running in daemon mode)."
 PRIME_USAGE = " !prime <number> determines if the given number is a prime number or not."
 SPOIL_ME_USAGE = " !spoilme outputs a movie spoiler."
+TRIVIA_USAGE = "!trivia <start/help/join/a/b/c/d>. Start a trivia game. Only available in trivia channel."
 
 LIST_OF_USAGES = [
   EIGHT_BALL_USAGE,
@@ -14,7 +15,8 @@ LIST_OF_USAGES = [
   HELP_USAGE,
   KILL_USAGE,
   PRIME_USAGE,
-  SPOIL_ME_USAGE
+  SPOIL_ME_USAGE,
+  TRIVIA_USAGE
 ]
 
 async def print_usage(client, message):
@@ -33,6 +35,8 @@ async def print_usage(client, message):
       await client.send_message(message.channel, PRIME_USAGE)
     elif split_msg[1] == "spoilme":
       await client.send_message(message.channel, SPOIL_ME_USAGE)
+    elif split_msg[1] == "trivia":
+      await client.send_message(message.channel, TRIVIA_USAGE)
     else:
       await client.send_message(message.channel, "\n".join(LIST_OF_USAGES))
   else:
